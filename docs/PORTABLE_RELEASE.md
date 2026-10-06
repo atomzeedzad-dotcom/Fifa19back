@@ -1,4 +1,4 @@
-# Portable launcher v0.2.0
+# Portable launcher v0.2.1
 
 The portable ZIP includes the Python runtime, Tk GUI, cryptography, frozen
 backend modules, the FIFA19 base roster, and default configuration. Users
@@ -17,9 +17,11 @@ Cryptography creates a per-machine localhost certificate/private key on first
 startup. The legacy FIFA18 private key is not shipped. This certificate is for
 backend development and does not establish FIFA19 client TLS trust/pinning.
 
-The game-file picker and report button provide read-only executable inspection.
+The game-file picker and report button provide read-only EXE/companion DLL inspection
+on a background thread. The Check button probes all five services, verifies our
+generated TLS certificate, validates the worker PID, and saves connection-report.json.
 There is no functional Play FUT19 action: FIFA19 client routing/session/wire
-integration remains unfinished without actual game files. v0.2.0 is explicitly
+integration remains unfinished without actual game files. v0.2.1 is explicitly
 published as a prerelease backend preview, not a playable game release.
 
 Verification must cover the actual extracted EXE with Python removed from PATH,

@@ -1,8 +1,11 @@
-FIFA19 LOCAL SERVER v0.2.0 — WINDOWS PORTABLE
+FIFA19 LOCAL SERVER v0.2.1 — WINDOWS PORTABLE
 
 ดาวน์โหลด ZIP แล้วใช้ Extract All / แตกไฟล์ทั้งหมดก่อน
 ดับเบิลคลิก FIFA19LocalServer.exe ในโฟลเดอร์ที่แตกออกมา
-กด "เปิด Local Server" แล้วกด "ตรวจการเชื่อมต่อ"
+กด "เปิด Local Server" แล้วกด "ตรวจทุกบริการ"
+โปรแกรมตรวจ Redirector TLS / Blaze / EASW / FUT ทั้งสองพอร์ต
+ผลอยู่ใน connection-report.json กด "เปิดเซฟ / Logs" เพื่อดู
+ปุ่ม "รายงานตัวเกม" อ่าน FIFA19.exe และ DLL ที่อยู่ข้างกัน โดยไม่แก้ไฟล์เกม
 กด "หยุด Server" หรือปิด launcher เมื่อเลิกใช้
 
 ไม่ต้องติดตั้ง Python และไม่ต้องพิมพ์คำสั่ง

@@ -1,6 +1,6 @@
-# FIFA19 Local Server v0.2.0 — Windows Portable Preview
+# FIFA19 Local Server v0.2.1 — Windows Portable Preview
 
-**[ดาวน์โหลด Windows Portable ZIP](https://github.com/atomzeedzad-dotcom/Fifa19back/releases/download/v0.2.0/FIFA19LocalServer-v0.2.0-Windows-x64.zip)**
+**[ดาวน์โหลด Windows Portable ZIP](https://github.com/atomzeedzad-dotcom/Fifa19back/releases/download/v0.2.1/FIFA19LocalServer-v0.2.1-Windows-x64.zip)**
 
 ดาวน์โหลดแล้วใช้ **Extract All / แตกไฟล์ทั้งหมด** จากนั้นดับเบิลคลิก
 `FIFA19LocalServer.exe` แล้วกด **เปิด Local Server**
@@ -23,7 +23,7 @@
 
 1. แตก ZIP แล้วดับเบิลคลิก `FIFA19LocalServer.exe`
 2. กด **เปิด Local Server**
-3. กด **ตรวจการเชื่อมต่อ** เพื่อดูสถานะ FUT API
+3. กด **ตรวจทุกบริการ** เพื่อตรวจ Redirector TLS, Blaze, EASW และ FUT ทั้งสองพอร์ต
 4. กด **หยุด Server** ก่อนปิดโปรแกรม
 
 ผู้พัฒนาที่รัน source ต้องมี Python 3.10 ขึ้นไปพร้อม tkinter และติดตั้ง
@@ -85,6 +85,10 @@ server ฟังเฉพาะ loopback และไม่มี background dow
 ใช้ฐาน SQLite ชั่วคราวและพอร์ตชั่วคราว แยกจากเซฟใช้งาน
 
 เมื่อมี FIFA19.exe เลือกไฟล์ใน launcher แล้วกด **รายงานตัวเกม** ได้เลย
+รุ่น v0.2.1 ตรวจ EXE และ DLL ที่อยู่ข้างกัน รวม CardsDLL และ OriginSDK
+บันทึก architecture, SHA-256, endpoint และ session API ที่พบ โดยไม่แก้ไฟล์เกม
+รายงานอยู่ใน `fifa19-client-report.json` ส่วนผลตรวจ server อยู่ใน `connection-report.json`
+อ่านเส้นทางการทำงานของ FIFA18 และส่วนที่นำมาใช้ได้ใน [FIFA18_PORT_REVIEW.md](docs/FIFA18_PORT_REVIEW.md)
 ผู้พัฒนาสามารถสร้างรายงานเดียวกันแบบอ่านอย่างเดียวผ่านคำสั่ง:
 
 ```powershell

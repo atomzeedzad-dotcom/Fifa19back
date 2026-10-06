@@ -17,4 +17,4 @@ def runtime_root() -> Path:
     return Path(os.environ.get('LOCALAPPDATA', str(Path.home()/'AppData/Local')))/'FIFA19LocalFUT'
 
 
-VERSION = '0.2.0'
+VERSION = '0.2.1'

@@ -3,12 +3,12 @@
   "owner": "Codex-FIFA19",
   "status": "portable_ready_client_pending",
   "clientVerified": false,
-  "summary": "Portable Windows launcher and local server include Python/Tk/cryptography; per-machine TLS is generated automatically. Actual FIFA19 connectivity/gameplay remains unfinished because no game files are available.",
+  "summary": "Investigated the FIFA18 GUI/installer/hosts/TLS/Origin session/FUT chain. FIFA19 reuses backend services; added five-service diagnostics and read-only EXE/companion DLL evidence collection. FIFA18 native addresses cannot be applied to an absent FIFA19 build.",
   "verification": [
-    "16 isolated source tests passed",
+    "22 isolated source tests passed, including five-service checks, wrong worker rejection, TLS trust mismatch and read-only/malformed PE fixtures",
     "Extracted frozen EXE runs without Python on PATH in Unicode/space paths",
     "Frozen EXE TLS/Blaze/FUT requests and SQLite persistence across worker restart passed",
-    "Frozen GUI Start/Check/Stop/Restart/Close passed; workers stop gracefully",
+    "Frozen GUI Start/five-service Check/read-only PE fixture report/Stop/Restart/Close passed; workers stop gracefully",
     "Release ZIP contains no private TLS key; identity is generated on each machine"
   ],
   "sourceReferenceReview": "FIFA18 needs_changes: ambiguous duplicate slot-zero Draft fallback; excluded in FIFA19",
@@ -21,6 +21,7 @@
     "Store empty; historical base roster rarity and uncommon league IDs unverified",
     "FIFA18 inherited cosmetic/consumable/wire contracts remain unverified against FIFA19"
   ],
-  "version": "0.2.0",
-  "releaseAsset": "FIFA19LocalServer-v0.2.0-Windows-x64.zip"
+  "version": "0.2.1",
+  "releaseAsset": "FIFA19LocalServer-v0.2.1-Windows-x64.zip",
+  "referenceInvestigation": "docs/FIFA18_PORT_REVIEW.md"
 }

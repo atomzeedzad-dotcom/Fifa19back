@@ -19,7 +19,7 @@ if __package__ in (None, ''):
 from app_paths import app_root, runtime_root
 
 ROOT = app_root()
-VERSION = '0.2.0-backend-preview'
+VERSION = '0.2.1-backend-preview'
 DEFAULT_CONFIG = ROOT/'config/server.json'
 
 

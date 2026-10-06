@@ -64,12 +64,13 @@ def main() -> int:
             '**This is a local backend preview, not a playable FIFA19 Local FUT release.** '
             'FIFA19 game files are not included. Client routing and FUT19 gameplay are not implemented/verified. '
             'Draft, matches, Squad Battles and pack purchases remain disabled.\n\n'
-            'Includes a graphical Start/Stop/Check launcher, a read-only game inspection option, '
+            'Includes a graphical Start/Stop/Check launcher with five-service diagnostics, '
+            'read-only EXE and companion DLL inspection, '
             '15,462 historical base player definitions and independent local saves. '
             'Development TLS keys are generated separately on each machine; no private key is shipped.\n\n'
             'ดาวน์โหลด ZIP แล้วแตกไฟล์ทั้งหมด จากนั้นดับเบิลคลิก FIFA19LocalServer.exe '
             'ไม่ต้องติดตั้ง Python และไม่ต้องพิมพ์คำสั่ง รุ่นนี้ยังเข้าเล่น FUT19 ในเกมจริงไม่ได้\n\n'
-            'Verification: 16 source regression tests, extracted executable startup with no Python on PATH, '
+            'Verification: 22 source regression tests, extracted executable startup with no Python on PATH, '
             'TLS/Blaze/FUT checks, persistent squad across executable restart, and graceful stop. '
             'See SHA256SUMS.txt for the archive checksum.')
     releases = request(f'/repos/{REPOSITORY}/releases')

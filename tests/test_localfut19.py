@@ -83,6 +83,30 @@ class ServerIntegrationTests(unittest.TestCase):
         with urllib.request.urlopen(f'http://127.0.0.1:{self.config["ports"]["easw"]}/routing', timeout=3) as response:
             self.assertEqual(response.status, 200)
 
+    def test_fifa18_style_service_chain_diagnostics(self):
+        from server.diagnostics import diagnose
+        report = diagnose(self.config, Path(self.sandbox.name), os.getpid())
+        self.assertEqual(report['status'], 'passed', report)
+        self.assertEqual({row['service'] for row in report['checks']}, set(self.config['ports']))
+        self.assertFalse(report['clientVerified'])
+
+    def test_diagnostics_reject_wrong_worker(self):
+        from server.diagnostics import diagnose
+        report = diagnose(self.config, Path(self.sandbox.name), -1)
+        failed = {row['service'] for row in report['checks'] if not row['passed']}
+        self.assertEqual(failed, {'fut', 'fut_secondary'})
+        self.assertEqual(report['status'], 'failed')
+
+    def test_diagnostics_do_not_skip_certificate_validation(self):
+        from server.diagnostics import diagnose
+        from server.tls_identity import ensure_identity
+        with tempfile.TemporaryDirectory() as wrong_runtime:
+            ensure_identity(Path(wrong_runtime))
+            report = diagnose(self.config, Path(wrong_runtime), os.getpid())
+        failed = {row['service'] for row in report['checks'] if not row['passed']}
+        self.assertEqual(failed, {'redirector'})
+        self.assertEqual(report['status'], 'failed')
+
     def test_tls_redirector_returns_configured_blaze_port(self):
         context = ssl._create_unverified_context()
         # This proves TLS framing only; certificate trust against a real
