@@ -1,0 +1,6 @@
+{
+  "host": "127.0.0.1",
+  "ports": {"redirector": 42330, "blaze": 10151, "easw": 42332, "fut": 9099, "fut_secondary": 9199},
+  "instance": "fifa-2019-pc",
+  "client_verified": false
+}

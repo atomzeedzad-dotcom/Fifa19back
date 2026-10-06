@@ -1,0 +1,78 @@
+{
+  "source": "D:\\Fifaback18",
+  "files": [
+    {
+      "file": "localfut18_server.py",
+      "sourceSha256": "883676c27d9957a2592d75a3d431b293fe8e7ba077c81de29fcce04ce2efcfa7",
+      "snapshotSha256": "2117522735fc4b9aba9d8e125fc87bbea5e88c3565a3a270a00f92f61948dfee",
+      "bootstrapChanges": [
+        {
+          "anchor": "RUNTIME=LOCALAPP/'FIFA18LocalFUT'",
+          "count": 1
+        },
+        {
+          "anchor": "DB_PATH=RUNTIME/'fut18-local.sqlite3'",
+          "count": 1
+        },
+        {
+          "anchor": "OFFLINE_ONLY=env_flag('FIFA18_LOCAL_OFFLINE',True)",
+          "count": 1
+        },
+        {
+          "anchor": "ENABLE_BACKGROUND_REFRESH=env_flag('FIFA18_LOCAL_BACKGROUND_REFRESH',False) and not OFFLINE_ONLY",
+          "count": 1
+        },
+        {
+          "anchor": "LOGFILE=LOGDIR/f'localfut18-{STAMP}.log'",
+          "count": 1
+        },
+        {
+          "anchor": "_db_init()\n_load_persistent_globals()",
+          "count": 1
+        },
+        {
+          "anchor": "'resourceGameYear':2018",
+          "count": 10
+        },
+        {
+          "anchor": "'year':2018",
+          "count": 3
+        },
+        {
+          "anchor": "'year':'2018'",
+          "count": 1
+        },
+        {
+          "anchor": "contexts=((0,0),(0,2018),(2,2018),(6,0))",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "fut18_catalog.py",
+      "sourceSha256": "14388bab631737b7d23bca8921a78440f432a0dd3bf3cb214292a66d96bfc3db",
+      "snapshotSha256": "ed6403166559664e2fe26d6566325eb4b19bb54f32b496b978e4f2e76397fadd",
+      "bootstrapChanges": []
+    },
+    {
+      "file": "fut18_sbc_archive.py",
+      "sourceSha256": "5cb47469ac2315a130025942ff71c3ea65023612aa1db6b46dd761cfefd3622d",
+      "snapshotSha256": "13649d2066e348cbea2cc08a48c4b28398fc17f5ae5471ee906bf0fe491168e4",
+      "bootstrapChanges": []
+    },
+    {
+      "file": "fut18_runtime.py",
+      "sourceSha256": "a2d6b3a94cf094f923154a0fa4d1ab02899d4a33b6ad86b30363b17fff8a7613",
+      "snapshotSha256": "613106f34919f6330791bd09e5db20a1f98d2e9bd85045946169e1d84442dd99",
+      "bootstrapChanges": []
+    },
+    {
+      "file": "fut18_draft_slots.py",
+      "sourceSha256": "5d63e60415cc30464b29cc8e5fefe4562057de17d877d8dec4544c065ad4a1dc",
+      "snapshotSha256": "924264314e5aabf6f584d72622d185c43c4d734bc220fa8ad9f42cfb9690efe6",
+      "bootstrapChanges": []
+    }
+  ],
+  "review": "FIFA18 reference review needs_changes: duplicate slot-zero Draft choice. FIFA19 Draft endpoints disabled.",
+  "clientFilesCopied": false
+}
