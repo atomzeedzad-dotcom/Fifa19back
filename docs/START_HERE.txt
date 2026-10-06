@@ -1,0 +1,25 @@
+FIFA19 LOCAL SERVER v0.2.0 — WINDOWS PORTABLE
+
+ดาวน์โหลด ZIP แล้วใช้ Extract All / แตกไฟล์ทั้งหมดก่อน
+ดับเบิลคลิก FIFA19LocalServer.exe ในโฟลเดอร์ที่แตกออกมา
+กด "เปิด Local Server" แล้วกด "ตรวจการเชื่อมต่อ"
+กด "หยุด Server" หรือปิด launcher เมื่อเลิกใช้
+
+ไม่ต้องติดตั้ง Python และไม่ต้องพิมพ์คำสั่ง
+เก็บโฟลเดอร์ _internal, config และ data ไว้ข้างไฟล์ .exe
+เซฟและ logs อยู่ที่ %LOCALAPPDATA%\FIFA19LocalFUT
+TLS สำหรับเครื่องนี้จะสร้างให้อัตโนมัติครั้งแรก
+
+สถานะรุ่นนี้:
+เป็นตัวทดลอง launcher และ local server
+ยังเข้าเล่น FUT19 ในเกมจริงไม่ได้
+ไม่มีไฟล์เกม FIFA19 รวมมาด้วย
+การเชื่อมต่อเกม, Draft, แข่ง, ซื้อแพ็ก และโหมด FUT19 ยังไม่พร้อม
+เมื่อมีเกมจริง จะต้องตรวจและทำส่วนเชื่อมต่อก่อนเปิดให้เล่น
+
+หากเปิด server ไม่สำเร็จ ให้กด "เปิดเซฟ / Logs" และดู launcher.log
+หากมี server เปิดซ้ำ ให้หยุดตัวเก่าก่อนเปิดตัวใหม่
+
+Windows x64 portable launcher. Bundled Python runtime.
+This is a backend preview, not a playable FIFA19 Local FUT release.
+No game files are included. FIFA19 client integration is not yet implemented.

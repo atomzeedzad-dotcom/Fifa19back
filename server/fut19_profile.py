@@ -3,8 +3,9 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from app_paths import app_root
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = app_root()
 
 
 def install(namespace: dict) -> None:

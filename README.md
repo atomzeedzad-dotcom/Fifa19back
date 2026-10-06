@@ -1,4 +1,15 @@
-# FIFA19 Local Server — Backend Preview
+# FIFA19 Local Server v0.2.0 — Windows Portable Preview
+
+**[ดาวน์โหลด Windows Portable ZIP](https://github.com/atomzeedzad-dotcom/Fifa19back/releases/download/v0.2.0/FIFA19LocalServer-v0.2.0-Windows-x64.zip)**
+
+ดาวน์โหลดแล้วใช้ **Extract All / แตกไฟล์ทั้งหมด** จากนั้นดับเบิลคลิก
+`FIFA19LocalServer.exe` แล้วกด **เปิด Local Server**
+รวม Python และส่วนประกอบไว้แล้ว ไม่ต้องพิมพ์คำสั่งหรือติดตั้ง Python
+เก็บโฟลเดอร์ `_internal`, `data` และ `config` ไว้ข้าง `.exe`
+
+**รุ่นนี้เปิด launcher และ server ได้ แต่ยังเข้าเล่น FUT19 ในเกมจริงไม่ได้**
+การเชื่อมตัวเกมต้องพัฒนาต่อเมื่อมี FIFA19.exe ให้ทดสอบ
+ไฟล์ที่ใช้สำหรับคนทั่วไปอยู่ใน **Releases**; ZIP ของ **Code → Download ZIP** เป็น source สำหรับพัฒนา
 
 เตรียม local backend สำหรับ FIFA19 โดยอ้างอิงระบบจาก `D:\Fifaback18`
 **ยังไม่ใช่รุ่นที่ยืนยันว่าเปิด FUT19 ในเกมได้** เพราะตอนทำงานไม่มีไฟล์เกม FIFA19
@@ -7,16 +18,18 @@
 
 ## วิธีเปิด
 
-ต้องมี Python 3.10 ขึ้นไป พร้อม tkinter (Python สำหรับ Windows ปกติมีให้)
-ไม่ต้องติดตั้ง pip packages และไม่ต้องใช้สิทธิ์ Administrator เพื่อเปิด backend
+สำหรับคนทั่วไป ใช้ Windows Portable ZIP ด้านบน ไม่ต้องใช้คำสั่ง
+ไม่ต้องใช้สิทธิ์ Administrator เพื่อเปิด backend
 
-1. ดับเบิลคลิก `Fifaback19.bat`
-2. กด **เปิด Server**
+1. แตก ZIP แล้วดับเบิลคลิก `FIFA19LocalServer.exe`
+2. กด **เปิด Local Server**
 3. กด **ตรวจการเชื่อมต่อ** เพื่อดูสถานะ FUT API
 4. กด **หยุด Server** ก่อนปิดโปรแกรม
 
+ผู้พัฒนาที่รัน source ต้องมี Python 3.10 ขึ้นไปพร้อม tkinter และติดตั้ง
+`python -m pip install -r requirements.txt`
+จากนั้นใช้ `Fifaback19.bat` หรือ `python server/localfut19.py`
 เปิดแบบ console ได้ด้วย `RUN_LOCAL_FUT19.cmd` และหยุดด้วย Ctrl+C
-หรือใช้ `python server/localfut19.py`
 
 ## บริการและข้อมูล
 
@@ -61,7 +74,8 @@ Draft, World Cup, Division Rivals, Squad Battles, SBC archive, match dispatch �
 Draft ในต้นแบบพบการเลือก slot เพิ่มจากคำสั่งซ้ำ จึงไม่เปิดใช้ fallback นั้นใน derivative นี้
 World Cup DLC ของ FIFA18 ไม่ควรถูกนำไปอ้างเป็นโหมด FIFA19
 
-TLS certificate เป็น certificate เพื่อพัฒนาที่คัดจากต้นแบบ
+TLS certificate/key สำหรับพัฒนาจะสร้างอัตโนมัติแยกในเครื่องแต่ละคน
+แพ็กเกจไม่รวม private key ของผู้พัฒนา และไม่ต้องตั้งค่า TLS ผ่านคำสั่ง
 การทดสอบ handshake ใช้ client ที่ไม่ตรวจ trust; ยังไม่ยืนยันว่า FIFA19 จะยอมรับ certificate นี้
 server ฟังเฉพาะ loopback และไม่มี background download/crawl
 
@@ -70,7 +84,8 @@ server ฟังเฉพาะ loopback และไม่มี background dow
 รัน `TEST_LOCAL_FUT19.cmd` หรือ `python -m unittest discover -s tests -v`
 ใช้ฐาน SQLite ชั่วคราวและพอร์ตชั่วคราว แยกจากเซฟใช้งาน
 
-เมื่อมี FIFA19.exe ให้สร้างรายงานแบบอ่านอย่างเดียว:
+เมื่อมี FIFA19.exe เลือกไฟล์ใน launcher แล้วกด **รายงานตัวเกม** ได้เลย
+ผู้พัฒนาสามารถสร้างรายงานเดียวกันแบบอ่านอย่างเดียวผ่านคำสั่ง:
 
 ```powershell
 python tools/inspect_game.py "D:\FIFA 19"
@@ -90,6 +105,13 @@ EA session, FIRE2/TDF command contracts, และ FUT19 onboarding/schema
 - `tools/import_fut19.py`: สร้างฐาน JSON จาก CSV ที่เก็บไว้ โดยไม่ต้องออนไลน์
 - `tools/create_reference_snapshot.py`: สร้าง snapshot ใหม่จากต้นแบบ (ไม่จำเป็นสำหรับใช้งาน)
 - `tests/`: ทดสอบ TLS, Blaze, HTTP, isolation และ persistence
+- `portable_entry.py`: ทางเข้าของโปรแกรม Windows แบบ GUI และ server worker
+- `tools/build_portable.py`: สร้าง EXE และ ZIP สำหรับแจก
+- `tools/verify_portable.py`: ทดสอบ EXE ที่แตกจาก ZIP โดยไม่มี Python บน PATH
+- `tools/publish_release.py`: อัปโหลดแพ็กเกจที่ผ่านการตรวจไป GitHub Releases
+
+ผู้ดูแลสร้างแพ็กเกจใหม่ได้โดยติดตั้ง `requirements-build.txt` แล้วใช้
+`python tools/build_portable.py` และ `python tools/verify_portable.py`
 
 ไม่ควรรัน `engine/localfut18_server.py` โดยตรง; ใช้ launcher หรือ `server/localfut19.py`
 เพราะ adapter เป็นส่วนที่กำหนด routing/config และปิดฟังก์ชันที่ยังไม่รองรับ

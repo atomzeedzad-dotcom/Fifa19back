@@ -14,9 +14,12 @@ import threading
 import urllib.parse
 from http.server import ThreadingHTTPServer
 from pathlib import Path
+if __package__ in (None, ''):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app_paths import app_root, runtime_root
 
-ROOT = Path(__file__).resolve().parents[1]
-VERSION = '0.1.0-backend-preview'
+ROOT = app_root()
+VERSION = '0.2.0-backend-preview'
 DEFAULT_CONFIG = ROOT/'config/server.json'
 
 
@@ -91,6 +94,7 @@ def adapt_engine(engine, config: dict):
 
     def health():
         return {'product': 'FIFA19LocalFUT', 'version': VERSION, 'status': 'ready',
+                'processId': os.getpid(),
                 'clientVerified': False, 'ports': ports,
                 'database': str(engine.DB_PATH), 'playerCount': len(engine._load_player_defs(False)),
                 'unsupported': ['client-routing', 'draft', 'world-cup', 'division-rivals', 'sbc-archive', 'special-cards', 'matches', 'squad-battles', 'pack-purchases'],
@@ -205,7 +209,12 @@ class RunningServer:
         self.servers = []
         self.threads = []
         fut_handler, redirect_handler = adapt_engine(self.engine, config)
-        context = self.engine.tls_context(cert or ROOT/'tls/winter15-chain.pem', key or ROOT/'tls/winter15.key')
+        if bool(cert) != bool(key):
+            raise ValueError('Supply both --cert and --key, or neither')
+        if cert is None:
+            from server.tls_identity import ensure_identity
+            cert, key = ensure_identity(self.engine.RUNTIME)
+        context = self.engine.tls_context(cert, key)
         ports = config['ports']
         constructors = [
             ('redirector', lambda address: self.engine.LoggingTLSServer(address, redirect_handler, context)),
@@ -248,13 +257,14 @@ def main() -> int:
     parser.add_argument('--cert', type=Path)
     parser.add_argument('--key', type=Path)
     parser.add_argument('--launcher-control', action='store_true', help='Stop gracefully when launcher sends stop on stdin')
+    parser.add_argument('--stop-file', type=Path, help='Stop when this private launcher control file exists')
     args = parser.parse_args()
     if args.runtime:
         os.environ['FIFA19_LOCAL_RUNTIME'] = str(args.runtime.resolve())
     stop = threading.Event()
     signal.signal(signal.SIGINT, lambda *_: stop.set())
     signal.signal(signal.SIGTERM, lambda *_: stop.set())
-    if args.launcher_control:
+    if args.launcher_control and sys.stdin is not None:
         def watch_launcher():
             for line in sys.stdin:
                 if line.strip().lower() == 'stop':
@@ -266,7 +276,10 @@ def main() -> int:
         running = RunningServer(load_config(args.config), args.cert, args.key)
         running.start()
         try:
-            stop.wait()
+            while not stop.wait(0.2):
+                if args.stop_file and args.stop_file.is_file():
+                    args.stop_file.unlink(missing_ok=True)
+                    stop.set()
         finally:
             running.close()
     except Exception as exc:

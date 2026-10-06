@@ -2,6 +2,10 @@ __pycache__/
 *.pyc
 runtime/
 reports/
+build/
+dist/
+release/
+*.spec
 
 .env
 *.key

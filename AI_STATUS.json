@@ -1,23 +1,26 @@
 {
   "project": "FIFA19LocalFUT",
   "owner": "Codex-FIFA19",
-  "status": "backend_ready_client_pending",
+  "status": "portable_ready_client_pending",
   "clientVerified": false,
-  "summary": "Standalone local backend preview derived from FIFA18; FIFA19 base roster and separate save. No FIFA19 game files available; client routing and gameplay remain unfinished.",
+  "summary": "Portable Windows launcher and local server include Python/Tk/cryptography; per-machine TLS is generated automatically. Actual FIFA19 connectivity/gameplay remains unfinished because no game files are available.",
   "verification": [
-    "14 isolated unittest cases passed, including TLS Redirector, fragmented Blaze FIRE2, FUT auth/account/massinfo, squad persistence, namespace, configuration and unsupported feature aliases",
-    "Independent server processes reused SQLite squad data and stopped through launcher stdin with exit code 0",
-    "Hidden Tk launcher start, health check and graceful stop passed",
-    "All Python and JSON files parsed successfully"
+    "16 isolated source tests passed",
+    "Extracted frozen EXE runs without Python on PATH in Unicode/space paths",
+    "Frozen EXE TLS/Blaze/FUT requests and SQLite persistence across worker restart passed",
+    "Frozen GUI Start/Check/Stop/Restart/Close passed; workers stop gracefully",
+    "Release ZIP contains no private TLS key; identity is generated on each machine"
   ],
   "sourceReferenceReview": "FIFA18 needs_changes: ambiguous duplicate slot-zero Draft fallback; excluded in FIFA19",
   "reviewReport": "docs/REVIEW.md",
-  "nextAction": "Obtain installed FIFA19 executable/version; inspect read-only, verify redirector/TLS/EA session/FIRE2/FUT contracts, implement reversible client routing, then test actual FUT19 onboarding.",
+  "nextAction": "Obtain an installed licensed FIFA19 build and implement/test reversible client routing plus actual FUT19 wire/session/gameplay before publishing a playable release.",
   "limitations": [
     "No FIFA19.exe or game installation exists in the supplied workspace",
-    "No native game patches or client installer included",
+    "No client routing/game patch installer included; portable backend launcher exists",
     "Draft, SBC, World Cup, Rivals, Squad Battles, matches and purchases disabled",
     "Store empty; historical base roster rarity and uncommon league IDs unverified",
     "FIFA18 inherited cosmetic/consumable/wire contracts remain unverified against FIFA19"
-  ]
+  ],
+  "version": "0.2.0",
+  "releaseAsset": "FIFA19LocalServer-v0.2.0-Windows-x64.zip"
 }
